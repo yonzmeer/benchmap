@@ -1,0 +1,57 @@
+name: Master - Pull Request
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: npm ci
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin $GITHUB_BASE_REF
+      - uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: lint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: npm ci
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin $GITHUB_BASE_REF
+      - uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+      - run: npm ci
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin $GITHUB_BASE_REF
+      - uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: test
