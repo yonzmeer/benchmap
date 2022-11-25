@@ -1,6 +1,6 @@
 {
   "name": "benchmap",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/benchmap/src",
   "prefix": "bnp",
@@ -15,9 +15,20 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/benchmap/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/benchmap/src/favicon.ico", "apps/benchmap/src/assets"],
-        "styles": ["apps/benchmap/src/styles.scss"],
-        "scripts": []
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "node_modules/cesium/Build/Cesium",
+            "output": "assets/cesium"
+          },
+          "apps/benchmap/src/favicon.ico",
+          "apps/benchmap/src/assets"
+        ],
+        "styles": [
+          "node_modules/cesium/Build/Cesium/Widgets/widgets.css",
+          "apps/benchmap/src/styles.scss"
+        ],
+        "scripts": ["node_modules/cesium/Build/Cesium/Cesium.js"]
       },
       "configurations": {
         "production": {
@@ -25,7 +36,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "10mb"
             },
             {
               "type": "anyComponentStyle",
