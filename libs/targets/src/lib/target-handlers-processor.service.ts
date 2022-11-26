@@ -3,17 +3,11 @@ import { MaybeAsync, PluginProcessor } from '@benchmap/plugins';
 import { TARGET_HANDLERS } from './config';
 import { TargetsService } from './targets.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TargetHandlersProcessorService implements PluginProcessor {
-  constructor(private targetsService: TargetsService) {
-    console.log('oof');
-  }
+  constructor(private targetsService: TargetsService) {}
 
   process(moduleRef: NgModuleRef<any>): MaybeAsync<void> {
-    console.log(moduleRef);
-
     const targetHandlers = moduleRef.injector.get(TARGET_HANDLERS);
 
     flatten(targetHandlers)
