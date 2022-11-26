@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@benchmap/cesium": ["libs/cesium/src/index.ts"],
-      "@benchmap/plugins": ["libs/plugins/src/index.ts"]
+      "@benchmap/plugins": ["libs/plugins/src/index.ts"],
+      "@benchmap/targets": ["libs/targets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
