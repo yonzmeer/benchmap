@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@benchmap/cesium": ["libs/cesium/src/index.ts"]
+      "@benchmap/cesium": ["libs/cesium/src/index.ts"],
+      "@benchmap/plugins": ["libs/plugins/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
