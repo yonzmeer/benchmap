@@ -43,7 +43,7 @@ export class PluginModuleLoaderService {
     lazyModule: LazyPluginModule
   ): Observable<LoadedLazyPluginModule> {
     return this.loadModuleFactory(lazyModule).pipe(
-      map((factory: NgModuleFactory<any>) => {
+      map((factory: NgModuleFactory<unknown>) => {
         const module = factory.create(this.injector);
         return new LoadedLazyPluginModule(lazyModule, module);
       })
@@ -53,7 +53,7 @@ export class PluginModuleLoaderService {
   private loadModuleFactory({
     loadChildren: module,
     name,
-  }: LazyPluginModule): Observable<NgModuleFactory<any>> {
+  }: LazyPluginModule): Observable<NgModuleFactory<unknown>> {
     return wrapIntoObservable(module()).pipe(
       mergeMap((t) => {
         if (t instanceof NgModuleFactory) {
@@ -63,7 +63,7 @@ export class PluginModuleLoaderService {
 
         try {
           // JIT
-          return from(this.compiler.compileModuleAsync(t as Type<any>));
+          return from(this.compiler.compileModuleAsync(t as Type<unknown>));
         } catch (e) {
           throw new Error(
             `Module ${name} exported incorrectly. An NgModule or NgModuleFactory should be exported`

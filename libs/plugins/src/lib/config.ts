@@ -4,7 +4,7 @@ import { LazyPluginModule, PluginProcessor } from './interfaces';
 export class LoadedLazyPluginModule {
   constructor(
     public module: LazyPluginModule,
-    public moduleRef: NgModuleRef<any>
+    public moduleRef: NgModuleRef<unknown>
   ) {}
 }
 

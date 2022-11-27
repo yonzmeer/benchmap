@@ -2,11 +2,14 @@ import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { LAZY_PLUGIN_MODULES } from './config';
 import { LazyPluginModules, PluginModuleConfig } from './interfaces';
 import { PluginFeatureModule } from './plugin-feature.module';
-import { PluginRootModule, PLUGIN_ROOT_MODULE_CONFIG } from './plugin-root.module';
+import {
+  PluginRootModule,
+  PLUGIN_ROOT_MODULE_CONFIG,
+} from './plugin-root.module';
 
 @NgModule()
 export class PluginsModule {
-  static forFeature(): Type<any> {
+  static forFeature(): Type<unknown> {
     return PluginFeatureModule;
   }
 
@@ -18,8 +21,8 @@ export class PluginsModule {
       ngModule: PluginRootModule,
       providers: [
         { provide: LAZY_PLUGIN_MODULES, useValue: lazyPluginModules },
-        { provide: PLUGIN_ROOT_MODULE_CONFIG, useValue: config }
-      ]
+        { provide: PLUGIN_ROOT_MODULE_CONFIG, useValue: config },
+      ],
     };
   }
 }

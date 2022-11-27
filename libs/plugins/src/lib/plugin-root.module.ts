@@ -1,10 +1,17 @@
-import { NgModule, NgModuleRef, Inject, Optional, InjectionToken } from '@angular/core';
+import {
+  NgModule,
+  NgModuleRef,
+  Inject,
+  Optional,
+  InjectionToken,
+} from '@angular/core';
 import { PluginModuleBootstrapperService } from './plugin-module-bootstrapper.service';
 import { PluginModuleLoaderService } from './plugin-module-loader.service';
 import { PluginModuleConfig } from './interfaces';
 
-export const PLUGIN_ROOT_MODULE_CONFIG =
-  new InjectionToken<PluginModuleConfig>('PLUGIN_ROOT_MODULE_CONFIG');
+export const PLUGIN_ROOT_MODULE_CONFIG = new InjectionToken<PluginModuleConfig>(
+  'PLUGIN_ROOT_MODULE_CONFIG'
+);
 
 const DEFAULT_CONFIG: PluginModuleConfig = {
   boostrapImmediately: true,
@@ -18,7 +25,7 @@ export class PluginRootModule {
   constructor(
     @Optional() @Inject(PLUGIN_ROOT_MODULE_CONFIG) config: PluginModuleConfig,
     private boostrapper: PluginModuleBootstrapperService,
-    private loader: PluginModuleLoaderService,
+    private loader: PluginModuleLoaderService
   ) {
     config = config || {};
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -32,7 +39,7 @@ export class PluginRootModule {
     }
   }
 
-  registerFeature(moduleRef: NgModuleRef<any>) {
+  registerFeature(moduleRef: NgModuleRef<unknown>) {
     if (this.config.boostrapImmediately) {
       this.boostrapper.bootstrap(moduleRef).subscribe();
     } else {

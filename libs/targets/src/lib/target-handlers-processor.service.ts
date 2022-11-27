@@ -7,7 +7,7 @@ import { TargetsService } from './targets.service';
 export class TargetHandlersProcessorService implements PluginProcessor {
   constructor(private targetsService: TargetsService) {}
 
-  process(moduleRef: NgModuleRef<any>): MaybeAsync<void> {
+  process(moduleRef: NgModuleRef<unknown>): MaybeAsync<void> {
     const targetHandlers = moduleRef.injector.get(TARGET_HANDLERS);
 
     flatten(targetHandlers)
