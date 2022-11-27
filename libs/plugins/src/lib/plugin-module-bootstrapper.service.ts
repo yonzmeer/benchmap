@@ -1,6 +1,5 @@
 import { Injectable, NgModuleRef } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { from, mergeMap, Observable } from 'rxjs';
 import { PluginProcessorsService } from './plugin-processors.service';
 
 @Injectable({

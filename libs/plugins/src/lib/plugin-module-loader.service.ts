@@ -5,8 +5,7 @@ import {
   NgModuleFactory,
   Type,
 } from '@angular/core';
-import { EMPTY, from, Observable, of } from 'rxjs';
-import { finalize, map, mergeMap } from 'rxjs/operators';
+import { EMPTY, finalize, from, map, mergeMap, Observable, of } from 'rxjs';
 import { LAZY_PLUGIN_MODULES, LoadedLazyPluginModule } from './config';
 import { LazyPluginModule } from './interfaces';
 import { checkGuards } from './operators';

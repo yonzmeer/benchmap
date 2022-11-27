@@ -1,1 +1,6 @@
+<div class="handlers">
+  <span *ngFor="let route of routes" (click)="click(route)">
+    {{ route || 'home' }}
+  </span>
+</div>
 <router-outlet></router-outlet>

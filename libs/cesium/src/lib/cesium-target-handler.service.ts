@@ -5,6 +5,8 @@ import { Target, TargetHandler } from '@benchmap/targets';
   providedIn: 'root',
 })
 export class CesiumTargetHandlerService implements TargetHandler {
+  name = 'cesium';
+
   handle(target: Target): void {
     console.log(target);
   }

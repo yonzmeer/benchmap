@@ -1,0 +1,14 @@
+.handlers {
+  display: flex;
+
+  gap: 1rem;
+
+  * {
+    padding: 0.5rem;
+
+    font-size: 1.5rem;
+    font-weight: bolder;
+
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,5 @@
 import { Inject, Injectable, NgModuleRef } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { from, mergeMap, Observable } from 'rxjs';
 import { PLUGIN_PROCESSORS } from './config';
 import { PluginProcessor } from './interfaces';
 import { wrapIntoObservable } from './utils/collections';
