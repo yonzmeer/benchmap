@@ -1,5 +1,9 @@
 import { InjectionToken, Type } from '@angular/core';
-import { TargetHandler, TargetsModuleOptions } from './types';
+import {
+  TargetHandler,
+  TargetsCreatorOptions,
+  TargetsModuleOptions,
+} from './types';
 
 export const TARGET_HANDLERS = new InjectionToken<Type<TargetHandler>[][]>(
   'Target Handlers'
@@ -8,3 +12,8 @@ export const TARGET_HANDLERS = new InjectionToken<Type<TargetHandler>[][]>(
 export const TARGETS_MODULE_OPTIONS = new InjectionToken<TargetsModuleOptions>(
   'Targets module Options'
 );
+
+export const DEFAULT_TARGETS_CREATOR_OPTIONS: TargetsCreatorOptions = {
+  amount: 1000,
+  updateInterval: 200,
+};
