@@ -10,4 +10,8 @@ export class CesiumTargetHandlerService implements TargetHandler {
   handle(target: Target): void {
     console.log(target);
   }
+
+  deleteAll(): void {
+    console.log('delete all');
+  }
 }

@@ -7,7 +7,10 @@ import {
   interval,
   map,
   Observable,
+  shareReplay,
   switchMap,
+  tap,
+  withLatestFrom,
   zip,
 } from 'rxjs';
 import { v4 as uuid } from 'uuid';
@@ -32,12 +35,17 @@ export class TargetsService {
     DEFAULT_TARGETS_CREATOR_OPTIONS
   );
 
+  private readonly activeHandler$ = this.options.activeHandlerName$.pipe(
+    distinctUntilChanged(),
+    map((name) => this.nameToHandlers[name]),
+    shareReplay(1)
+  );
+
   constructor(
     @Inject(TARGETS_MODULE_OPTIONS) private options: TargetsModuleOptions
   ) {
-    this.options.activeHandler$
+    this.activeHandler$
       .pipe(
-        map((name) => this.nameToHandlers[name]),
         switchMap((handler) =>
           this.createUpdatingTargets().pipe(
             map((target) => ({ handler, target }))
@@ -60,7 +68,9 @@ export class TargetsService {
     return this._targetsCreatorOptions$.pipe(
       map(({ amount }) => amount),
       distinctUntilChanged(),
-      switchMap((length) =>
+      withLatestFrom(this.activeHandler$),
+      tap(([, activeHandler]) => activeHandler.deleteAll()),
+      switchMap(([length]) =>
         zip(Array.from({ length }, () => this.createUpdatingTarget()))
       ),
       concatAll()

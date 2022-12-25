@@ -8,10 +8,12 @@ export interface TargetHandler {
   name: string;
 
   handle(target: Target): void;
+
+  deleteAll(): void;
 }
 
 export interface TargetsModuleOptions {
-  activeHandler$: Observable<string>;
+  activeHandlerName$: Observable<string>;
 }
 
 export interface TargetsCreatorOptions {

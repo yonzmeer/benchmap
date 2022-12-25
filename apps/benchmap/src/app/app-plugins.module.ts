@@ -24,7 +24,7 @@ import { filter, map } from 'rxjs';
     {
       provide: TARGETS_MODULE_OPTIONS,
       useFactory: (router: Router): TargetsModuleOptions => ({
-        activeHandler$: router.events.pipe(
+        activeHandlerName$: router.events.pipe(
           filter((event) => event instanceof NavigationEnd),
           map(() => router.url.substring(1))
         ),
