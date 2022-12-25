@@ -16,4 +16,5 @@ export const TARGETS_MODULE_OPTIONS = new InjectionToken<TargetsModuleOptions>(
 export const DEFAULT_TARGETS_CREATOR_OPTIONS: TargetsCreatorOptions = {
   amount: 3,
   updateInterval: 1000,
+  updateProbability: 100,
 };

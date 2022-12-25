@@ -19,4 +19,5 @@ export interface TargetsModuleOptions {
 export interface TargetsCreatorOptions {
   amount: number;
   updateInterval: number;
+  updateProbability: number;
 }

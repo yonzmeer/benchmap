@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
   concatAll,
@@ -24,6 +25,7 @@ import {
   TargetsCreatorOptions,
   TargetsModuleOptions,
 } from './types';
+import { distinctUntilUnequal } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -81,9 +83,16 @@ export class TargetsService {
     const id = uuid();
 
     return this._targetsCreatorOptions$.pipe(
-      map(({ updateInterval }) => updateInterval),
-      distinctUntilChanged(),
-      switchMap((updateInterval) => interval(updateInterval)),
+      map(({ updateInterval, updateProbability }) => ({
+        updateInterval,
+        updateProbability,
+      })),
+      distinctUntilUnequal(),
+      switchMap(({ updateInterval, updateProbability }) =>
+        interval(updateInterval).pipe(
+          filter(() => Math.random() * 100 < updateProbability)
+        )
+      ),
       map(() => ({ id } as Target))
     );
   }
