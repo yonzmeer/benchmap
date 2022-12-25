@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { isEqual } from 'lodash';
 import {
   BehaviorSubject,
   concatAll,
