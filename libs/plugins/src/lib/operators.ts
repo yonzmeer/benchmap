@@ -1,13 +1,16 @@
 import { Injector } from '@angular/core';
-import { concat, MonoTypeOperatorFunction, Observable, of } from 'rxjs';
 import {
+  concat,
   concatMap,
   defaultIfEmpty,
   filter,
   first,
   map,
+  MonoTypeOperatorFunction,
+  Observable,
+  of,
   skipWhile,
-} from 'rxjs/operators';
+} from 'rxjs';
 import { LazyPluginModule } from './interfaces';
 import { wrapIntoObservable } from './utils/collections';
 import { isCanLoad, isFunction } from './utils/type_guard';

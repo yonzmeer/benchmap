@@ -3,7 +3,7 @@ import { PluginRootModule } from './plugin-root.module';
 
 @NgModule()
 export class PluginFeatureModule {
-  constructor(moduleRef: NgModuleRef<any>, root: PluginRootModule) {
+  constructor(moduleRef: NgModuleRef<unknown>, root: PluginRootModule) {
     root.registerFeature(moduleRef);
   }
 }

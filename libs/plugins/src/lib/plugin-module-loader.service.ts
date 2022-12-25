@@ -5,8 +5,7 @@ import {
   NgModuleFactory,
   Type,
 } from '@angular/core';
-import { EMPTY, from, Observable, of } from 'rxjs';
-import { finalize, map, mergeMap } from 'rxjs/operators';
+import { EMPTY, finalize, from, map, mergeMap, Observable, of } from 'rxjs';
 import { LAZY_PLUGIN_MODULES, LoadedLazyPluginModule } from './config';
 import { LazyPluginModule } from './interfaces';
 import { checkGuards } from './operators';
@@ -43,7 +42,7 @@ export class PluginModuleLoaderService {
     lazyModule: LazyPluginModule
   ): Observable<LoadedLazyPluginModule> {
     return this.loadModuleFactory(lazyModule).pipe(
-      map((factory: NgModuleFactory<any>) => {
+      map((factory: NgModuleFactory<unknown>) => {
         const module = factory.create(this.injector);
         return new LoadedLazyPluginModule(lazyModule, module);
       })
@@ -53,7 +52,7 @@ export class PluginModuleLoaderService {
   private loadModuleFactory({
     loadChildren: module,
     name,
-  }: LazyPluginModule): Observable<NgModuleFactory<any>> {
+  }: LazyPluginModule): Observable<NgModuleFactory<unknown>> {
     return wrapIntoObservable(module()).pipe(
       mergeMap((t) => {
         if (t instanceof NgModuleFactory) {
@@ -63,7 +62,7 @@ export class PluginModuleLoaderService {
 
         try {
           // JIT
-          return from(this.compiler.compileModuleAsync(t as Type<any>));
+          return from(this.compiler.compileModuleAsync(t as Type<unknown>));
         } catch (e) {
           throw new Error(
             `Module ${name} exported incorrectly. An NgModule or NgModuleFactory should be exported`

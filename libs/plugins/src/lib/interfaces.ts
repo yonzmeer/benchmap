@@ -10,9 +10,9 @@ export interface PluginModuleConfig {
 
 export interface LazyPluginModule {
   loadChildren: LoadChildrenCallback;
-  canLoad?: (Type<any> | InjectionToken<any>)[];
+  canLoad?: (Type<unknown> | InjectionToken<unknown>)[];
   name: string;
-  data?: any;
+  data?: unknown;
 }
 
 export type LazyPluginModules = LazyPluginModule[];
@@ -24,5 +24,5 @@ export interface CanLoad {
 }
 
 export interface PluginProcessor {
-  process(moduleRef: NgModuleRef<any>): MaybeAsync<void>;
+  process(moduleRef: NgModuleRef<unknown>): MaybeAsync<void>;
 }
