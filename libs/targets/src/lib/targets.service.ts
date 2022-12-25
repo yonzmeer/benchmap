@@ -69,7 +69,7 @@ export class TargetsService {
       map(({ amount }) => amount),
       distinctUntilChanged(),
       withLatestFrom(this.activeHandler$),
-      tap(([, activeHandler]) => activeHandler.deleteAll()),
+      tap(([, activeHandler]) => activeHandler?.deleteAll()),
       switchMap(([length]) =>
         zip(Array.from({ length }, () => this.createUpdatingTarget()))
       ),
